@@ -7,4 +7,5 @@ const chautSchema = mongoose.Schema({
     received: Boolean,
 });
 
-export default mongoose.model('messageContent', chautSchema);
+/* collection */
+export default mongoose.model('messagecontent', chautSchema);
