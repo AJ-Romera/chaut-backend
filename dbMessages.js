@@ -8,4 +8,4 @@ const chautSchema = mongoose.Schema({
 });
 
 /* collection */
-export default mongoose.model('messagecontent', chautSchema);
+export default mongoose.model('messagecontents', chautSchema);

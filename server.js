@@ -36,6 +36,10 @@ db.once('open', () => {
 
     const msgCollection = db.collection('messagecontents');
     const changeStream = msgCollection.watch();
+
+    changeStream.on('change', (change) => {
+        console.log(change);
+    });
 });
 
 // api routes
