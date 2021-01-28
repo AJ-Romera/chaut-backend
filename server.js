@@ -2,10 +2,19 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './dbMessages.js';
+import Pusher from 'pusher';
 
 // app config
 const app = express();
 const port = process.env.PORT || 9000;
+
+const pusher = new Pusher({
+    appId: '1146398',
+    key: 'd8b17a5966dacdd69d8b',
+    secret: '44b81246715b8a012dd9',
+    cluster: 'eu',
+    useTLS: true,
+});
 
 // middleware
 app.use(express.json());
@@ -20,7 +29,11 @@ mongoose.connect(connection_url, {
     useUnifiedTopology: true,
 });
 
-// ????
+const db = mongoose.connection;
+
+db.once('open', () => {
+    console.log('DB connected');
+});
 
 // api routes
 app.get('/', (req, res) => res.status(200).send('hello world'));
