@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 9000;
 
 // middleware
+app.use(express.json());
 
 // DB config
 const connection_url =
