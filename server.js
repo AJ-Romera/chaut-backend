@@ -2,6 +2,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './dbMessages.js';
+import Rooms from './dbRooms.js';
 import Pusher from 'pusher';
 import cors from 'cors';
 
@@ -54,6 +55,22 @@ db.once('open', () => {
             console.log('Error triggering Pusher');
         }
     });
+
+    const roomCollection = db.collection('rooms');
+    const roomChangeStream = roomCollection.watch();
+
+    roomChangeStream.on('change', (change) => {
+        console.log('A change ocurred', change);
+
+        if (change.operationType === 'insert') {
+            const roomDetails = change.fullDocument;
+            pusher.trigger('rooms', 'inserted', {
+                name: roomDetails.name,
+            });
+        } else {
+            console.log('Error triggering Pusher');
+        }
+    });
 });
 
 // api routes
@@ -73,6 +90,28 @@ app.post('/messages/new', (req, res) => {
     const dbMessage = req.body;
 
     Messages.create(dbMessage, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(201).send(data);
+        }
+    });
+});
+
+app.get('/rooms/sync', (req, res) => {
+    Rooms.find((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(data);
+        }
+    });
+});
+
+app.post('/rooms/new', (req, res) => {
+    const dbRoom = req.body;
+
+    Rooms.create(dbRoom, (err, data) => {
         if (err) {
             res.status(500).send(err);
         } else {
