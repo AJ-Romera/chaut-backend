@@ -5,6 +5,7 @@ import Messages from './dbMessages.js';
 import Rooms from './dbRooms.js';
 import Pusher from 'pusher';
 import cors from 'cors';
+require('dotenv').config();
 
 // app config
 const app = express();
@@ -12,8 +13,8 @@ const port = process.env.PORT || 9000;
 
 const pusher = new Pusher({
     appId: '1146398',
-    key: 'd8b17a5966dacdd69d8b',
-    secret: '44b81246715b8a012dd9',
+    key: process.env.PUSHER_KEY,
+    secret: process.env.PUSHER_SECRET,
     cluster: 'eu',
     useTLS: true,
 });
@@ -23,8 +24,7 @@ app.use(express.json());
 app.use(cors());
 
 // DB config
-const connection_url =
-    'mongodb+srv://admin:nmL9IrOoUeWBpgMd@cluster0.5cuiv.mongodb.net/chautdb?retryWrites=true&w=majority';
+const connection_url = `mongodb+srv://admin:${process.env.MONGODB_PASS}@cluster0.5cuiv.mongodb.net/chautdb?retryWrites=true&w=majority`;
 
 mongoose.connect(connection_url, {
     useCreateIndex: true,
