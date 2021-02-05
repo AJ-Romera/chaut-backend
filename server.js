@@ -1,11 +1,13 @@
 // importing
+import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './dbMessages.js';
 import Rooms from './dbRooms.js';
 import Pusher from 'pusher';
 import cors from 'cors';
-require('dotenv').config();
+
+dotenv.config();
 
 // app config
 const app = express();
