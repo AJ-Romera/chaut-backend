@@ -15,8 +15,8 @@ const port = process.env.PORT || 9000;
 
 const pusher = new Pusher({
     appId: '1146398',
-    key: 'd8b17a5966dacdd69d8b',
-    secret: '44b81246715b8a012dd9',
+    key: process.env.PUSHER_KEY,
+    secret: process.env.PUSHER_SECRET,
     cluster: 'eu',
     useTLS: true,
 });
@@ -26,10 +26,7 @@ app.use(express.json());
 app.use(cors());
 
 // DB config
-const connection_url =
-    'mongodb+srv://admin:nmL9IrOoUeWBpgMd@cluster0.5cuiv.mongodb.net/chautdb?retryWrites=true&w=majority';
-
-/* PROBLEM HERE??? */
+const connection_url = process.env.MONGODB_URI;
 mongoose.connect(connection_url, {
     useCreateIndex: true,
     useNewUrlParser: true,
@@ -125,4 +122,4 @@ app.post('/rooms/new', (req, res) => {
 });
 
 // listen
-app.listen(port, () => console.log(`Listening on localhost: ${port}`));
+app.listen(port);
