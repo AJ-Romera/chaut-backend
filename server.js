@@ -29,6 +29,7 @@ app.use(cors());
 const connection_url =
     'mongodb+srv://admin:nmL9IrOoUeWBpgMd@cluster0.5cuiv.mongodb.net/chautdb?retryWrites=true&w=majority';
 
+/* PROBLEM HERE??? */
 mongoose.connect(connection_url, {
     useCreateIndex: true,
     useNewUrlParser: true,
