@@ -1,4 +1,4 @@
-#About Chaut
+# About Chaut
 Chaut is a messaging app made with the MERN stack, React and vanilla CSS for the frontend, MongoDB as database and Node/express for the backend.
 
 - I also use pusher for getting and posting the messages in real time (no refreshing).
@@ -9,6 +9,6 @@ Chaut is a messaging app made with the MERN stack, React and vanilla CSS for the
 - Icons provided by Material-Ui.
 - Logo and favicon designed by me using photoshop.
 
-#Important
+# Important
 Disclaimer: The messages are NOT encrypted, so messages are stored in my database!!! Do NOT write sensitive information. Chaut is a webapp for showing off my skills, It´s not a production work.
 
